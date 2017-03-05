@@ -61,11 +61,11 @@ class ViewController: UIViewController {
 
         for contact in self.contacts {
             if (!contact.phoneNumbers.isEmpty) {
-                let phoneNumberToCompareAgainst = phoneNumber.components(separatedBy: .whitespacesAndNewlines).filter{!$0.isEmpty}
+                let phoneNumberToCompareAgainst = phoneNumber.components(separatedBy: CharacterSet.decimalDigits.inverted).joined(separator: "")
                 for phoneNumber in contact.phoneNumbers {
                     if let phoneNumberStruct = phoneNumber.value as? CNPhoneNumber {
                         let phoneNumberString = phoneNumberStruct.stringValue
-                        let phoneNumberToCompare = phoneNumberString.components(separatedBy: .whitespacesAndNewlines).filter{!$0.isEmpty}
+                        let phoneNumberToCompare = phoneNumberString.components(separatedBy: CharacterSet.decimalDigits.inverted).joined(separator: "")
                         if phoneNumberToCompare == phoneNumberToCompareAgainst {
                             result = contact
                         }
